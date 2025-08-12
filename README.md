@@ -28,6 +28,20 @@ A modern Android plant scanner app that uses AI to identify plants and provide d
 - Dark mode support
 - Responsive design for different screen sizes
 
+## Screenshots
+
+<div align="center">
+
+### Home Screen
+| Light Mode | Dark Mode |
+|------------|----------|
+| ![Home Light](screenshots/app_home_light.png) | ![Home Dark](screenshots/app_home_dark.png) |
+
+### Scan Results
+![Scan Results](screenshots/scan_results.png)
+
+</div>
+
 ## Tech Stack
 
 - **Language**: Kotlin
@@ -93,6 +107,22 @@ app/src/main/java/com/kottland/searchplant/
    - Open the project in Android Studio
    - Sync the project
    - Run the app on a device or emulator
+
+### GitHub Actions CI/CD Setup
+
+This project includes automated builds and releases via GitHub Actions. To enable this:
+
+1. **Required Secrets** (Go to Settings > Secrets and variables > Actions):
+   - `GEMINI_API_KEY`: Your Google Gemini API key
+   - `SIGNING_KEY`: Base64 encoded Android signing keystore
+   - `ALIAS`: Keystore alias name
+   - `KEY_STORE_PASSWORD`: Keystore password
+   - `KEY_PASSWORD`: Key password
+
+2. **Automatic Releases**:
+   - Every push to `main` branch triggers a build
+   - Creates a new release with both debug and release APKs
+   - Release tags follow format: `vYYYY-MM-DD-{commit-hash}`
 
 ### Permissions Required
 
