@@ -33,12 +33,16 @@ A modern Android plant scanner app that uses AI to identify plants and provide d
 <div align="center">
 
 ### Home Screen
-| Light Mode | Dark Mode |
-|------------|----------|
-| ![Home Light](screenshots/app_home_light.png) | ![Home Dark](screenshots/app_home_dark.png) |
+| Light Mode                                    | Dark Mode                                       |
+|-----------------------------------------------|-------------------------------------------------|
+| ![Home Light](screenshots/app_home_light.png) | ![Home Dark](screenshots/app_home_dark.png)     |
+| ![Favorite](screenshots/favorite_plants.png)  | ![Scanned Result](screenshots/scan_results.png) |
 
-### Scan Results
-![Scan Results](screenshots/scan_results.png)
+
+### Favorite and Scanned Result
+| Favorite                                     | Scanned Result                                  |
+|----------------------------------------------|-------------------------------------------------|
+| ![Favorite](screenshots/favorite_plants.png) | ![Scanned Result](screenshots/scan_results.png) |
 
 </div>
 
@@ -110,19 +114,30 @@ app/src/main/java/com/kottland/searchplant/
 
 ### GitHub Actions CI/CD Setup
 
-This project includes automated builds and releases via GitHub Actions. To enable this:
+This project includes automated builds and releases via GitHub Actions.
 
-1. **Required Secrets** (Go to Settings > Secrets and variables > Actions):
-   - `GEMINI_API_KEY`: Your Google Gemini API key
-   - `SIGNING_KEY`: Base64 encoded Android signing keystore
+#### Basic Build (No Secrets Required)
+The workflow can build APKs without any configuration:
+- Builds debug and release APKs automatically
+- Uses dummy API key for compilation
+- APKs are unsigned but functional for testing
+- Perfect for contributors and forks
+
+#### Full Release Setup (Optional)
+For signed releases with real API functionality:
+
+1. **Optional Secrets** (Go to Settings > Secrets and variables > Actions):
+   - `GEMINI_API_KEY`: Your Google Gemini API key (for AI functionality)
+   - `SIGNING_KEY`: Base64 encoded Android signing keystore (for signed APKs)
    - `ALIAS`: Keystore alias name
    - `KEY_STORE_PASSWORD`: Keystore password
    - `KEY_PASSWORD`: Key password
 
 2. **Automatic Releases**:
    - Every push to `main` branch triggers a build
-   - Creates a new release with both debug and release APKs
+   - Creates releases only in original repository (not forks)
    - Release tags follow format: `vYYYY-MM-DD-{commit-hash}`
+   - APK signing occurs only when signing secrets are available
 
 ### Permissions Required
 

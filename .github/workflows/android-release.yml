@@ -35,7 +35,7 @@ jobs:
       
     - name: Create local.properties
       run: |
-        echo "GEMINI_API_KEY=${{ secrets.GEMINI_API_KEY }}" > local.properties
+        echo "GEMINI_API_KEY=${{ secrets.GEMINI_API_KEY || 'dummy_key_for_build' }}" > local.properties
         
     - name: Build debug APK
       run: ./gradlew assembleDebug
@@ -44,6 +44,7 @@ jobs:
       run: ./gradlew assembleRelease
       
     - name: Sign APK
+      if: ${{ secrets.SIGNING_KEY != '' }}
       uses: r0adkll/sign-android-release@v1
       id: sign_app
       with:
@@ -56,7 +57,7 @@ jobs:
         BUILD_TOOLS_VERSION: "34.0.0"
         
     - name: Upload APK artifacts
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: app-artifacts
         path: |
@@ -66,14 +67,14 @@ jobs:
   release:
     needs: build
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push' && github.repository_owner != 'fork'
     
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
       
     - name: Download artifacts
-      uses: actions/download-artifact@v3
+      uses: actions/download-artifact@v4
       with:
         name: app-artifacts
         path: artifacts/
