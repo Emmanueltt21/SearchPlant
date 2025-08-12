@@ -36,7 +36,6 @@ A modern Android plant scanner app that uses AI to identify plants and provide d
 | Light Mode                                    | Dark Mode                                       |
 |-----------------------------------------------|-------------------------------------------------|
 | ![Home Light](screenshots/app_home_light.png) | ![Home Dark](screenshots/app_home_dark.png)     |
-| ![Favorite](screenshots/favorite_plants.png)  | ![Scanned Result](screenshots/scan_results.png) |
 
 
 ### Favorite and Scanned Result
